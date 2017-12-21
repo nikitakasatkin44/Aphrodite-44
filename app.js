@@ -1,9 +1,18 @@
+'use strict';
+
 const express = require('express');
 const app = express();
 const router = express.Router();
 const moment = require('moment');
 const padEnd = require('pad-end');
-const path = __dirname + '/';
+const path = require('path');
+const config = require('./config');
+const curPath = __dirname + '/';
+
+app.disable('etag');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.set('trust proxy', true);
 
 router.use(function (req, res, next) {
     console.log(
@@ -12,20 +21,23 @@ router.use(function (req, res, next) {
     next();
 });
 
+app.use('/books', require('./books/crud'));
+app.use('/records', require('./records/crud'));
+
 router.get("/", function(req, res) {
-    res.sendFile(path + "index.html");
+    res.sendFile(curPath + "index.html");
 });
 
 router.get("/about", function(req, res) {
-    res.sendFile(path + "about.html");
+    res.sendFile(curPath + "about.html");
 });
 
 router.get("/products", function(req, res) {
-    res.sendFile(path + "products.html");
+    res.sendFile(curPath + "products.html");
 });
 
 router.get("/store", function(req, res) {
-    res.sendFile(path + "store.html");
+    res.sendFile(curPath + "store.html");
 });
 
 app.use("/", router);
@@ -35,3 +47,5 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
+
+module.exports = app;
