@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        meta(name="description" content="")
+        meta(name="author" content="Nikita Kasatkin")
+        title Апельсин
+
+        link(href="vendor/bootstrap/css/bootstrap.min.css", rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i", rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i", rel="stylesheet")
+        link(href="css/business-casual.min.css" rel="stylesheet")
+        link(href="css/custom.css" rel="stylesheet")
+        script(src="js/script.js")
+
+    body
+        h1.site-heading.text-center.text-white.d-none.d-lg-block
+            span.site-heading-upper.text-primary.mb-3 A free bootstrap
+            span.site-heading-lower Business casual
+
+        nav.navbar.navbar-expand-lg.navbar-dark.py-lg-4#mainNav
+            div.container
+                a.navbar-brand.text-uppercase.text-expanded.font-weight-bold.d-lg-none(href="#")
+                button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive")
+                    span(class="navbar-toggler-icon")
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.mx-auto
+                        li.nav-item.px-lg-4(class = activeLink === 'home' ? 'active' : '')
+                            a.nav-link.text-uppercase.text-expanded(href="/") Home
+
+                        li.nav-item.px-lg-4
+                            a.nav-link.text-uppercase.text-expanded(href="/about") About
+
+                        li.nav-item.px-lg-4
+                            a.nav-link.text-uppercase.text-expanded(href="/products") Products
+
+                        li.nav-item.px-lg-4
+                            a.nav-link.text-uppercase.text-expanded(href="/store") Store
+
+                        li.nav-item.px-lg-4(class = activeLink === 'books' ? 'active' : '')
+                            a.nav-link.text-uppercase.text-expanded(href="/books") Books
+
+        block content
+
+
+

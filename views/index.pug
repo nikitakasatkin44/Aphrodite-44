@@ -1,0 +1,225 @@
+doctype html
+html(lang="en")
+    head
+        title Мы банда
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet")
+        link(href="custom.css" rel="stylesheet")
+        script(src="vendor/popper/popper.min.js")
+        script(src="vendor/jquery/jquery.min.js")
+        script(src="vendor/bootstrap/js/bootstrap.min.js")
+        script(src="/fa/fontawesome-all.js")
+        link(href="https://fonts.googleapis.com/css?family=Alegreya|Open+Sans" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet")
+
+    body#myPage(data-spy="scroll" data-target="#navbar" data-offset="50")
+        // Навигационная панель
+        nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top#navbar
+            ul.navbar-nav
+                li.nav-item: a.nav-link(href="#band") Главная
+                li.nav-item: a.nav-link(href="#concert") Концерты
+                li.nav-item: a.nav-link(href="#photo") Фотографии
+                li.nav-item: a.nav-link(href="#contact") Контакты
+
+
+        // Фотографии
+        div.bg-1#band
+            div.container.text-center
+                h1 Банда
+                p Сайт для нашей банды
+
+                //PHOTOS
+                div.row
+                    div.col-sm-4
+                        p: strong Никита
+                        a(href="#demo" data-toggle="collapse")
+                            img.person(src="img/Никита-min.jpg" alt="Nikita's photo")
+                        div.collapse#demo
+                            p Guitarist
+                            p member since 1999
+
+                    div.col-sm-4
+                        p: strong Юлия
+                        a(href="#demo2" data-toggle="collapse")
+                            img.person(src="img/Юля-300x300.jpg" alt="Ulia's photo")
+                        div.collapse#demo2
+                            p Designer
+                            p member since 2014
+
+                    div.col-sm-4
+                        p: strong Матвей
+                        a(href="#demo3" data-toggle="collapse")
+                            img.person(src="img/Матвей-min.jpg" alt="Mattew's photo")
+                        div.collapse#demo3
+                            p Chaos manager
+                            p member since 2014
+
+
+
+        // Концерты
+        div.bg-2#concert
+            div.container
+                h3.text-center Наши концерты
+                p.text-center Не забудьте купить билет!
+
+                ul.list-group
+                    li.list-group-item Сентябрь - распродано
+                    li.list-group-item Октябрь - распродано
+                    li.list-group-item 3 Ноября -
+                        span.attention  билеты в наличии!
+
+                div.row.text-center.pt-4
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/paris.jpg")
+                            p: strong Paris
+                            p Пятница, 27 ноября 2015
+                            button.btn(data-toggle="modal" data-target="#myModal") Купить билеты
+
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/newyork.jpg")
+                            p: strong New York
+                            p Вторник, 4 декабря 2015
+                            button.btn(data-toggle="modal" data-target="#myModal") Купить билеты
+
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/sanfran.jpg")
+                            p: strong San Francisco
+                            p Четверг, 15 января 2016
+                            button.btn(data-toggle="modal" data-target="#myModal") Купить билеты
+
+            // Форма покупки билета
+            .modal.fade#myModal(role="dialog")
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h3: p Билеты
+                            button.close(type="button" data-dismiss="modal") &times;
+                        .modal-body
+                            form
+                                .form-group
+                                    i.fas.fa-shopping-cart
+                                    label(for="psw"): span Билеты, 350р. за штуку
+                                    input.form-control#psw(type="number" placeholder="Сколько штук?")
+                                .form-group
+                                    i.fas.fa-user
+                                    label(for="usrname"): span  Получатель
+                                    input.form-control#usrname(placeholder="Почта")
+                                button.btn.btn-block Оплатить
+                                    span.glyphicon.glyphicon-ok
+                        .modal-footer
+                            button.btn.btn-danger.btn-default.pull-left(data-dismiss="modal")
+                                span.glyphicon.glyphicon-remove Отмена
+                            p: a(href="#") Нужна помощь?
+
+
+        // Карусель
+        div.bg-3#photo
+            div.container
+                h2.text-center.mb-4 Фотографии
+                div.carousel.slide#carouselExampleControls(data-ride="carousel")
+                    div.carousel-inner(role="listbox")
+                        div.carousel-item.active
+                            img.d-block.img-fluid(src="img/carousel/beach-format.jpg" alt="first slide")
+                            .carousel-caption
+                                h3 Пляж
+                                p Побережье реки Волги
+
+                        div.carousel-item
+                            img.d-block.img-fluid(src="img/carousel/yaroslavl-format.jpg" alt="second slide")
+                            .carousel-caption
+                                h3 Ярославль
+                                p Храм в древнейшем городе России
+
+                        div.carousel-item
+                            img.d-block.img-fluid(src="img/carousel/rusinovo-new.jpg" alt="third slide")
+                            .carousel-caption
+                                h3 Русиново
+                                p База отдыха
+
+                    a.carousel-control-prev(href="#carouselExampleControls" data-slide="prev")
+                        span.carousel-control-prev-icon
+                        span.sr-only Previous
+
+                    a.carousel-control-next(href="#carouselExampleControls" data-slide="next")
+                        span.carousel-control-next-icon
+                        span.sr-only Next
+
+        // Контакты
+        .bg-4#contact
+            .container
+                h3.text-center Контактные данные
+                p.text-center Мы любим наших фанатов!
+                .row
+                    .col-md-5
+                        p Вы наш поклонник? оставьте сообщение.
+                        p Кострома, Россия
+                        i.fas.fa-phone.fa-pull-left
+                        p Телефон: 8-950-248-7378
+                        i.fas.fa-envelope.fa-pull-left
+                        p Почта: nikita.kasatkin44@gmail.com
+
+                    .col-md-7
+                        .row
+                            .col-sm-6.form-group
+                                input.form-control#name(name="name" placeholder="Имя" required)
+                            .col-sm-6.form-group
+                                input.form-control#email(name="email" placeholder="Почта" required)
+
+                        textarea.form-control#comments(name="comments" placeholder="Комментарий" rows="5")
+                        br
+                        .row
+                            .col-md-12.form-group
+                                button.btn.float-right Отправить
+
+        // Карта
+        .bg-5
+            #googleMap
+
+
+
+        // Колонтитул
+        .bg-6
+            footer.text-center
+                a(href="#myPage" data-toggle="tooltip" title="К началу")
+                    i.fas.fa-arrow-up
+                p Сайт сделал Касаткин Никита
+                a(href="http://localhost:8080/test" data-toggle="tooltip" title="Посетите наш сайт") www.nikita-kasatkin44.com
+
+
+        script.
+            function myMap() {
+                var myCenter = new google.maps.LatLng(57.73112469001489, 41.010417940732395);
+                var mapProp = {
+                    center: myCenter,
+                    zoom: 18,
+                    scrollwheel: false,
+                    draggable: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                var marker = new google.maps.Marker({position: myCenter});
+                marker.setMap(map);
+            }
+
+        script(src="tooltip.js")
+        script(src="map.js")
+        script(src="scroll.js")
+        script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQn3D3GpK8l7QkbqYOh0ofy2LqZn_gK10&callback=initializeMap")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

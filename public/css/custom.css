@@ -1,0 +1,10 @@
+.list-group {
+    padding: 0.5rem 10rem 10rem 10rem;
+}
+
+#addBookBtn {
+    margin-left: 10rem;
+    /*justify-content: center;*/
+    /*text-align: center;*/
+    /*display: block;*/
+}

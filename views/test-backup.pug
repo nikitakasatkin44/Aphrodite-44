@@ -1,0 +1,119 @@
+doctype html
+html(lang="en")
+    head
+        title Мы банда
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet")
+        link(href="custom.css" rel="stylesheet")
+        script(src="vendor/popper/popper.min.js")
+        script(src="vendor/jquery/jquery.min.js")
+        script(src="vendor/bootstrap/js/bootstrap.min.js")
+        link(href="https://fonts.googleapis.com/css?family=Alegreya|Open+Sans" rel="stylesheet")
+
+
+    body
+        div.bg-1
+            div.container.text-center
+                h1 Банда
+                p Сайт для нашей банды
+
+                //PHOTOS
+                div.row
+                    div.col-sm-4
+                        p
+                            strong Никита
+                        a(href="#demo" data-toggle="collapse")
+                            img.person(src="img/Никита-min.jpg" alt="Nikita's photo")
+                        div.collapse#demo
+                            p Guitarist
+                            p member since 1999
+
+                    div.col-sm-4
+                        p
+                            strong Юлия
+                        a(href="#demo2" data-toggle="collapse")
+                            img.person(src="img/Юля-300x300.jpg" alt="Ulia's photo")
+                        div.collapse#demo2
+                            p Designer
+                            p member since 2014
+
+                    div.col-sm-4
+                        p
+                            strong Матвей
+                        a(href="#demo3" data-toggle="collapse")
+                            img.person(src="img/Матвей-min.jpg" alt="Mattew's photo")
+                        div.collapse#demo3
+                            p Chaos manager
+                            p member since 2014
+
+
+        div.bg-2
+            div.container
+                h3.text-center Наши концерты
+                p.text-center Не забудьте купить билет!
+
+                ul.list-group
+                    li.list-group-item Сентябрь - распродано
+                    li.list-group-item Октябрь - распродано
+                    li.list-group-item 3 Ноября -
+                        span.attention  билеты в наличии!
+
+                div.row.text-center.pt-4
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/paris.jpg")
+                            p: strong Paris
+                            p Пятница, 27 ноября 2015
+                            button.btn Купить билеты
+
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/newyork.jpg")
+                            p: strong New York
+                            p Вторник, 4 декабря 2015
+                            button.btn Купить билеты
+
+                    div.col-sm-4
+                        div.img-thumbnail
+                            img(src="/img/section-2/sanfran.jpg")
+                            p: strong San Francisco
+                            p Четверг, 15 января 2016
+                            button.btn Купить билеты
+
+
+
+
+        div.bg-3
+            div.container
+                div.carousel.slide#carouselExampleControls(data-ride="carousel")
+                    div.carousel-inner(role="listbox")
+                        div.carousel-item.active
+                            img.d-block.img-fluid(src="img/carousel/beach-format.jpg" alt="first slide")
+
+                        div.carousel-item
+                            img.d-block.img-fluid(src="img/carousel/yaroslavl-format.jpg" alt="second slide")
+
+                        div.carousel-item
+                            img.d-block.img-fluid(src="img/carousel/rusinovo-new.jpg" alt="third slide")
+
+                    a.carousel-control-prev(href="#carouselExampleControls" data-slide="prev")
+                        span.carousel-control-prev-icon
+                        span.sr-only Previous
+
+                    a.carousel-control-next(href="#carouselExampleControls" data-slide="next")
+                        span.carousel-control-next-icon
+                        span.sr-only Next
+
+
+
+
+
+
+
+
+
+
+
+
+

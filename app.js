@@ -24,8 +24,16 @@ router.use(function (req, res, next) {
 app.use('/books', require('./books/crud'));
 app.use('/records', require('./records/crud'));
 
-router.get("/", function(req, res) {
-    res.sendFile(curPath + "index.html");
+router.get('/', (req, res) => {
+    res.render('index.pug', {
+        activeLink: 'home'
+    });
+});
+
+router.get('/test', (req, res) => {
+    res.render('test.pug', {
+
+    });
 });
 
 router.get("/about", function(req, res) {
