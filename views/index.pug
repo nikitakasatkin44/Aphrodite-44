@@ -36,11 +36,13 @@ html(lang="en")
                             p: strong Никита
                             a(href="#demo" data-toggle="collapse")
                                 img.person(src="img/Никита-min.jpg" alt="Nikita's photo")
-                            div.collapse#demo
+                            div.collapse#demo.mt-4
                                 form#msg1(action="/chat/add" method="post")
-                                    input(name="message" id="message")
-                                    input(name="author" id="author" value="Никита" type="hidden")
-                                    button Отправить
+                                    .row
+                                        input.form-inline(name="message" id="message")
+                                        input(name="author" id="author" value="Никита" type="hidden")
+                                        button.btn.btn-secondary Отправить
+
 
                         .col-sm-3
                             p: strong Юлия
@@ -64,19 +66,20 @@ html(lang="en")
                         each message in messages
                             a.list-group-item
                                 p.author.d-inline-block= message.author
+                                p.d-inline-block.float-right= message.messageTime
                                 | :
                                 |
-                                p.text-primary.d-inline-block= message.message
-                                p.d-inline-block.float-right= message.messageTime
+                                p.message-text.d-inline-block= message.message
+
 
                     if !messages.length
                         p No books found.
 
                     if nextPageToken
-                        a#nextPage.btn.btn-alert.btn-block(href=`?pageToken=${encodeURIComponent(nextPageToken)}`) Еще сообщения
+                        a#nextPage.btn.btn-alert.btn-block(href=`?page=${encodeURIComponent(nextPageToken)}`) Еще сообщения
 
                     if prevPageToken
-                        a#prevPage.btn.btn-alert.btn-block.my-0.d-none(href=`?pageToken=${encodeURIComponent(nextPageToken)}`) Предыдущие сообщения
+                        a#prevPage.btn.btn-alert.btn-block.my-0(href=`?page=${encodeURIComponent(page - 1)}`) Предыдущие сообщения
 
 
         //Концерты
@@ -212,7 +215,7 @@ html(lang="en")
                 a(href="#myPage" data-toggle="tooltip" title="К началу")
                     i.fas.fa-arrow-up
                 p Сайт сделал Касаткин Никита
-                a(href="http://localhost:8080/test" data-toggle="tooltip" title="Посетите наш сайт") www.nikita-kasatkin44.com
+                a(href="http://localhost:8080/" data-toggle="tooltip" title="Посетите наш сайт") www.nikita-kasatkin44.com
 
 
         script(src="tooltip.js")

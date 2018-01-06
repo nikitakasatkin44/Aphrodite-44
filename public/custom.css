@@ -185,7 +185,9 @@ h1, h2, h3, h4 {
 }
 
 .author {
+    font-size: 1.4rem;
     color: #d7bd06;
+    margin-bottom: 0.5rem;
 }
 
 .list-group {
@@ -205,6 +207,13 @@ h1, h2, h3, h4 {
     border: 1.5px solid;
 }
 
-.list-group-item:hover {
-    background-color: #88feaa;
+.message-text {
+    color: #51769e;
 }
+
+.list-group-item:hover {
+    /*background-color: #88feaa;*/
+    opacity: 0.85;
+
+}
+

@@ -33,17 +33,22 @@ function getMessages () {
     return require(`./chat/model-${require('./config').get('DATA_BACKEND')}`);
 }
 
+const recordPerPage = 5;
+
 router.get('/', (req, res) => {
-    getMessages().list(7, req.query.pageToken, (err, entities, cursor) => {
+    getMessages().list(recordPerPage, req.query.page * recordPerPage || 0, (err, entities, cursor) => {
         if (err) {
             next(err);
             return;
         }
 
+        const page = req.query.page;
+
         res.render('index.pug', {
             messages: entities,
-            nextPageToken: cursor,
-            prevPageToken: req.query.pageToken - 6 > 0,
+            nextPageToken: cursor / recordPerPage,
+            prevPageToken: page !== '0',
+            page: page,
             activeLink: 'books'
         });
     });
