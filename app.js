@@ -23,10 +23,29 @@ router.use(function (req, res, next) {
 
 app.use('/books', require('./books/crud'));
 app.use('/records', require('./records/crud'));
+app.use('/chat', require('./chat/crud'));
+
+function getBooks () {
+    return require(`./books/model-${require('./config').get('DATA_BACKEND')}`);
+}
+
+function getMessages () {
+    return require(`./chat/model-${require('./config').get('DATA_BACKEND')}`);
+}
 
 router.get('/', (req, res) => {
-    res.render('index.pug', {
-        activeLink: 'home'
+    getMessages().list(7, req.query.pageToken, (err, entities, cursor) => {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        res.render('index.pug', {
+            messages: entities,
+            nextPageToken: cursor,
+            prevPageToken: req.query.pageToken - 6 > 0,
+            activeLink: 'books'
+        });
     });
 });
 
@@ -50,6 +69,19 @@ router.get("/store", function(req, res) {
 
 app.use("/", router);
 app.use(express.static('public'));
+app.use(function(req, res, next) {
+    const err = new Error('Oops!');
+    err.status = 404;
+    next(err);
+});
+
+app.use(function(err, req, res, next) {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    res.status(err.status || 500);
+    res.render('error');
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

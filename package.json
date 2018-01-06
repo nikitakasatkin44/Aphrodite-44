@@ -54,7 +54,8 @@
     "jquery": "^3.2.1",
     "moment": "^2.20.0",
     "pad-end": "^1.0.2",
-    "pad-start": "^1.0.2"
+    "pad-start": "^1.0.2",
+    "request": "latest"
   },
   "devDependencies": {
     "browser-sync": "2.18.13",
