@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        title тест
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet")
+        link(href="test2.css" rel="stylesheet")
+        link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
+
+
+    body
+        .container
+            .tab
+                button.tablinks#defaultOpen(onclick="openCity(event, 'London')") London
+                button.tablinks(onclick="openCity(event, 'Paris')") Paris
+                button.tablinks(onclick="openCity(event, 'Tokyo')") Tokyo
+
+            .tabcontent#London
+                span.topright(onclick="this.parentElement.style.display='none'") x
+                h3 London
+                p London is the capital of Great Britain
+
+            .tabcontent#Paris
+                span.topright(onclick="this.parentElement.style.display='none'") x
+                h3 Paris
+                p Paris is the capital of France
+
+            .tabcontent#Tokyo
+                span.topright(onclick="this.parentElement.style.display='none'") x
+                h3 Tokyo
+                p Tokyo is the capital of Japan
+
+
+
+
+        script(src="test.js")
+
+
+
+
+
+
+
+

@@ -9,10 +9,33 @@ const path = require('path');
 const config = require('./config');
 const curPath = __dirname + '/';
 
+const mongoose = require('mongoose');
+const passport = require('passport');
+require('./config/passport')(passport);
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
+const configDB = require('./config/database.js');
+const bodyParser = require('body-parser');
+
 app.disable('etag');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('trust proxy', true);
+
+// mongoose.connect(config.get('MONGO_URL'));
+mongoose.connect(configDB.url);
+
+// app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({ secret: 'abrakadabra' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
 
 router.use(function (req, res, next) {
     console.log(
@@ -36,6 +59,16 @@ function getMessages () {
 const recordPerPage = 5;
 
 router.get('/', (req, res) => {
+
+    let user;
+    if (isLoggedIn) {
+        user = req.user
+    } else {
+        user = ''
+    }
+
+
+
     getMessages().list(recordPerPage, req.query.page * recordPerPage || 0, (err, entities, cursor) => {
         if (err) {
             next(err);
@@ -45,6 +78,7 @@ router.get('/', (req, res) => {
         const page = req.query.page;
 
         res.render('index.pug', {
+            user: user,
             messages: entities,
             nextPageToken: cursor / recordPerPage,
             prevPageToken: page !== '0',
@@ -54,10 +88,39 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/test', (req, res) => {
-    res.render('test.pug', {
-
+router.get('/login', (req, res) => {
+    res.render('login.pug', {
+        message: req.flash('loginMessage')
     });
+});
+
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/profile',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
+router.get('/signup', (req, res) => {
+    res.render('signup.pug', {
+        message: req.flash('signupMessage')
+    });
+});
+
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+}));
+
+router.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile.pug', {
+        user: req.user
+    })
+});
+
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
 });
 
 router.get("/about", function(req, res) {
@@ -72,21 +135,39 @@ router.get("/store", function(req, res) {
     res.sendFile(curPath + "store.html");
 });
 
+router.get("/test", function(req, res) {
+    res.render("test.pug", {
+    })
+});
+
+router.get("/test2", function(req, res) {
+    res.render("test2.pug", {
+    })
+});
+
 app.use("/", router);
 app.use(express.static('public'));
-app.use(function(req, res, next) {
-    const err = new Error('Oops!');
-    err.status = 404;
-    next(err);
-});
+// app.use(function(req, res, next) {
+//     const err = new Error('Oops!');
+//     err.status = 404;
+//     next(err);
+// });
 
-app.use(function(err, req, res, next) {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+// app.use(function(err, req, res, next) {
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//     res.status(err.status || 500);
+//     res.render('error');
+// });
 
-    res.status(err.status || 500);
-    res.render('error');
-});
+function isLoggedIn(req, res, next) {
+
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/');
+}
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
